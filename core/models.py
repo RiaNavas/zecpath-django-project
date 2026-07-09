@@ -1,16 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class User(models.Model):
+class User(AbstractUser):
 
     ROLE_CHOICES = [
         ('Admin', 'Admin'),
         ('Employer', 'Employer'),
         ('Candidate', 'Candidate'),
     ]
-
-    name = models.CharField(max_length=100)
-
-    email = models.EmailField(unique=True)
 
     phone = models.CharField(max_length=15)
 
@@ -20,8 +17,6 @@ class User(models.Model):
         default='Candidate'
     )
 
-    is_active = models.BooleanField(default=True)
-
     is_verified = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,7 +24,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -44,7 +39,7 @@ class Candidate(models.Model):
     skills = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username
 
 
 class Job(models.Model):
