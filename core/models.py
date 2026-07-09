@@ -1,12 +1,35 @@
 from django.db import models
 
 class User(models.Model):
+
+    ROLE_CHOICES = [
+        ('Admin', 'Admin'),
+        ('Employer', 'Employer'),
+        ('Candidate', 'Candidate'),
+    ]
+
     name = models.CharField(max_length=100)
-    email = models.EmailField()
+
+    email = models.EmailField(unique=True)
+
+    phone = models.CharField(max_length=15)
+
+    role = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default='Candidate'
+    )
+
+    is_active = models.BooleanField(default=True)
+
+    is_verified = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
-
 
 class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
