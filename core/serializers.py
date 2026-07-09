@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Job, User
+from .models import Application
 
 
 class JobSerializer(serializers.ModelSerializer):
@@ -33,3 +34,8 @@ class UserSignupSerializer(serializers.ModelSerializer):
             phone=validated_data.get('phone', ''),
             role=validated_data.get('role', 'Candidate')
         )
+class ApplicationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Application
+        fields = '__all__'

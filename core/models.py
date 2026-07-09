@@ -41,7 +41,6 @@ class Candidate(models.Model):
     def __str__(self):
         return self.user.username
 
-
 class Job(models.Model):
     employer = models.ForeignKey(
         Employer,
