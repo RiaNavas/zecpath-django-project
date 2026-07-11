@@ -11,7 +11,6 @@ class IsAdmin(BasePermission):
             )
         )
 
-
 class IsEmployer(BasePermission):
     def has_permission(self, request, view):
         return (

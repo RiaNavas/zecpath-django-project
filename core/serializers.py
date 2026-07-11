@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Job, User
 from .models import Application
+from .models import CandidateProfile, EmployerProfile
 
 
 class JobSerializer(serializers.ModelSerializer):
@@ -39,3 +40,31 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = '__all__'
+
+class CandidateProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CandidateProfile
+
+        fields = [
+            'id',
+            'user',
+            'skills',
+            'education',
+            'experience',
+            'expected_salary',
+            'resume'
+        ]
+class EmployerProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = EmployerProfile
+
+        fields = [
+            'id',
+            'user',
+            'company_name',
+            'domain',
+            'company_size',
+            'is_verified'
+        ]
